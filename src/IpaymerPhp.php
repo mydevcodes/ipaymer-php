@@ -3,7 +3,11 @@
 namespace Mydevcodes\IpaymerPhp;
 
 use Mydevcodes\IpaymerPhp\Customer\Create;
+use Mydevcodes\IpaymerPhp\Customer\Details;
+use Mydevcodes\IpaymerPhp\Customer\Invoices;
+use Mydevcodes\IpaymerPhp\Customer\Link;
 use Mydevcodes\IpaymerPhp\Customer\Plan;
+use Mydevcodes\IpaymerPhp\Customer\Status;
 
 class IpaymerPhp
 {
@@ -45,13 +49,58 @@ class IpaymerPhp
         return (new Create($this->configuration))->create($params);
     }
 
+    /**
+     * Generates a checkout link
+     * @param string $customer
+     * @param string $plan
+     * @param string $returlUrl
+     * @return string
+     */
+    public function checkoutLink(string $customer, string $plan, $returlUrl = '')
+    {
+        return (new Link($customer))->checkout($plan, $returlUrl);
+    }
 
+    /**
+     * Generates the redirect link to add new card to customer
+     * @param string $customer
+     * @return string
+     */
+    public function newCardLink(string $customer)
+    {
+        return (new Link($customer))->newCard();
+    }
 
+    /**
+     * Get customer information
+     * including packages and cards
+     * @param string $customer
+     * @return array|string
+     */
+    public function customer(string $customer)
+    {
+        return (new Details($this->configuration, $customer))->fetch();
+    }
 
+    /**
+     * Customers status for all packages
+     * @param string $customer
+     * @return array|string
+     */
+    public function status(string $customer)
+    {
+        return (new Status($this->configuration, $customer))->check();
+    }
 
-
-
-
+    /**
+     * Return all customer invoices
+     * @param string $customer
+     * @return array|string
+     */
+    public function invoices(string $customer)
+    {
+        return (new Invoices($this->configuration, $customer))->fetch();
+    }
 
 
 

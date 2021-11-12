@@ -24,7 +24,7 @@ IpaymerPhp::init('Your_Secret_Key', 'production|development');
 ```
 
 ### Payment Plans
-All your payment plans should be already registred in iPaymer. If a customer is defined only the plans attached to the same payment gateway will be returned.
+All your payment plans should be already registered in iPaymer. If a customer is defined only the plans attached to the same payment gateway will be returned.
 
 ```php
 IpaymerPhp::init('Your_Secret_Key')->plans($customerId);
@@ -35,23 +35,38 @@ Creating a customer also requires a subscription and a credit card to be attache
 ```php
 $customerData = [
     'name' => 'Jimm',
-    'email' => 'jimmy@jimmy.com',
-    'card' => [
-        'name' => 'Jim Doe',
-        'number' => '5200828282828210',
-        'exp_month' => 10,
-        'exp_year' => 2022,
-        'cvc' => 123
-    ]
+    'email' => 'jimmy@jimmy.com'
 ];
 
 IpaymerPhp::init('Your_Secret_Key')->create($customerData);
 ```
 
+### Redirection links
+These helper methods will construct redirection links to iPaymer for different methods
+
+#### New subscription / Upgrade to package
+```php
+IpaymerPhp::init('Your_Secret_Key')->checkoutLink('CUSTOMER_IPAYMER_ID', 'PLAN_CODE', 'RETURN_URL');
+```
+
+#### New card
+```php
+IpaymerPhp::init('Your_Secret_Key')->newCardLink('CUSTOMER_IPAYMER_ID');
+```
+
+### Status
+Returns customer status on each plan separately. If a customer has 2 plans it will return the status and extra information regarding those plans.
+
+### Invoices
+Returns all customer invoices in a descending order
+```php
+IpaymerPhp::init('Your_Secret_Key')->invoices('CUSTOMER_IPAYMER_ID');
+```
+
 ### Cancel Plan
 Cancels a plan in customers billing cycle
 ```php
-IpaymerPhp::init('Your_Secret_Key')->cancel('_CUSTOMER_ID_', '_PLAN_ID_');
+IpaymerPhp::init('Your_Secret_Key')->cancel('CUSTOMER_IPAYMER_ID', 'PACKAGE_CODE');
 ```
 
 ### Changelog
