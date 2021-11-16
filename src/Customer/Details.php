@@ -26,6 +26,11 @@ class Details extends Request
             return $e->getMessage();
         }
 
+        if($this->httpStatus != 200)
+        {
+            return $this->prepareResponse("An error happened.");
+        }
+
         return $this->prepareResponse("Information fetched successfully!");
     }
 

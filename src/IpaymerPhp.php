@@ -102,10 +102,44 @@ class IpaymerPhp
         return (new Invoices($this->configuration, $customer))->fetch();
     }
 
+    /**
+     * Cancel a customer's plan
+     * Removes a plan from customer recurring state
+     * @param string $customer
+     * @param int $plan_id
+     * @return string
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     */
+    public function cancel(string $customer, string $plan_code)
+    {
+        return (new Plan($this->configuration, $customer, $plan_code))->cancel();
+    }
 
+    /**
+     * Attach a new subscription plan to customer
+     * @param string $customer
+     * @param int $plan_id
+     * @return string
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     */
+    public function assign(string $customer, string $plan_code, $quantity = NULL)
+    {
+        return (new Plan($this->configuration, $customer, $plan_code))->assign($quantity);
+    }
 
-
-
+    /**
+     * Replace a customer subscription with a new one!
+     * This should be used when upgrading a plan or a plan which is similar to previous one.
+     * @param string $customer
+     * @param string $from_plan
+     * @param string $to_plan
+     * @return string
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     */
+    public function change(string $customer, string $from_plan, string $to_plan)
+    {
+        return (new Plan($this->configuration, $customer, $to_plan))->change($from_plan);
+    }
 
     /**
      *  Returns all available plans for a specific platform
@@ -116,44 +150,5 @@ class IpaymerPhp
     {
         return (new \Mydevcodes\IpaymerPhp\Subscription\Plans($this->configuration))->retrieve($customer);
     }
-
-    /**
-     * Attach a new subscription plan to customer
-     * @param string $customer
-     * @param int $plan_id
-     * @return string
-     * @throws \GuzzleHttp\Exception\GuzzleException
-     */
-    public function assign(string $customer, int $plan_id)
-    {
-        return (new Plan($this->configuration, $customer, $plan_id))->assign();
-    }
-
-    /**
-     * Change customer plan
-     * Usually used within the same plan
-     * @param string $customer
-     * @param int $plan_id
-     * @return string
-     * @throws \GuzzleHttp\Exception\GuzzleException
-     */
-    public function change(string $customer, int $plan_id)
-    {
-        return (new Plan($this->configuration, $customer, $plan_id))->change();
-    }
-    
-    /**
-     * Cancel a customer's plan
-     * Removes a plan from customer recurring state
-     * @param string $customer
-     * @param int $plan_id
-     * @return string
-     * @throws \GuzzleHttp\Exception\GuzzleException
-     */
-    public function cancel(string $customer, int $plan_id)
-    {
-        return (new Plan($this->configuration, $customer, $plan_id))->cancel();
-    }
-
 
 }

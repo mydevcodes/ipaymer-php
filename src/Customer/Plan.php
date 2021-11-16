@@ -11,17 +11,17 @@ use Mydevcodes\IpaymerPhp\Utils\Routes;
 class Plan extends Request
 {
     public $customerId;
-    public $planId;
+    public $planCode;
 
     public function __construct(
         Configuration $configuration,
         string $customerId,
-        int $planId
+        string $planCode
     )
     {
         parent::__construct($configuration);
         $this->customerId = $customerId;
-        $this->planId = $planId;
+        $this->planCode = $planCode;
         $this->validate();
     }
 
@@ -31,15 +31,21 @@ class Plan extends Request
      * @return string
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
-    public function assign()
+    public function assign($quantity = NULL)
     {
         try {
             $this->postAPI(Routes::CUSTOMER_ASSIGN_PLAN, [
                 'customer_id' => $this->customerId,
-                'plan_id' => $this->planId
+                'plan_code' => $this->planCode,
+                'quantity' => $quantity
             ]);
         }catch (\Exception $e) {
             return $e->getMessage();
+        }
+
+        if($this->httpStatus != 200)
+        {
+            return $this->prepareResponse("An error happened.");
         }
 
         return $this->prepareResponse("Plan added to customer");
@@ -51,15 +57,21 @@ class Plan extends Request
      * @return string
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
-    public function change()
+    public function change(string $from_plan)
     {
         try {
             $this->postAPI(Routes::CUSTOMER_CHANGE_PLAN, [
                 'customer_id' => $this->customerId,
-                'plan_id' => $this->planId
+                'plan_code' => $this->planCode,
+                'change_from_plan' => $from_plan
             ]);
         }catch (\Exception $e) {
             return $e->getMessage();
+        }
+
+        if($this->httpStatus != 200)
+        {
+            return $this->prepareResponse("An error happened.");
         }
 
         return $this->prepareResponse($this->httpBody);
@@ -75,11 +87,19 @@ class Plan extends Request
         try {
             $this->postAPI(Routes::CUSTOMER_CANCEL_PLAN, [
                 'customer_id' => $this->customerId,
-                'plan_id' => $this->planId
+                'plan_code' => $this->planCode
             ]);
         }catch (\Exception $e) {
             return $e->getMessage();
         }
+
+        if($this->httpStatus != 200)
+        {
+            return $this->prepareResponse("An error happened.");
+        }
+
+        return $this->prepareResponse("Subscription has been cancelled successfully!");
+
     }
 
     public function validate()
@@ -89,9 +109,9 @@ class Plan extends Request
             throw ValidationException::missingRequiredParameter('customer_id', 400);
         }
 
-        if(!$this->planId)
+        if(!$this->planCode)
         {
-            throw ValidationException::missingRequiredParameter('planId', 400);
+            throw ValidationException::missingRequiredParameter('plan_code', 400);
         }
     }
 }

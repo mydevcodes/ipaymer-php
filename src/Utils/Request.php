@@ -87,8 +87,9 @@ class Request
             $this->httpHeaders = $request->getHeaders();
             $this->httpBody = json_decode($request->getBody()->getContents());
         } catch (\Exception $e) {
+            $this->httpStatus = $e->getCode();
+            $this->httpBody = $e->getMessage();
             return $e->getMessage();
-//            HandleExceptions::handle($e->getCode());
         }
     }
 

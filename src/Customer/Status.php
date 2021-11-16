@@ -27,6 +27,11 @@ class Status extends Request
             return $e->getMessage();
         }
 
+        if($this->httpStatus != 200)
+        {
+            return $this->prepareResponse("An error happened.");
+        }
+
         $activePacks = [];
 
         $packages = $this->httpBody->packages;
