@@ -23,7 +23,10 @@ use Mydevcodes\IpaymerPhp\IpaymerPhp;
 IpaymerPhp::init('Your_Secret_Key', 'production|development');
 ```
 
-### Payment Plans
+## Methods
+
+
+### Payment Plans [DEPRACATED]
 All your payment plans should be already registered in iPaymer. If a customer is defined only the plans attached to the same payment gateway will be returned.
 
 ```php
@@ -38,7 +41,7 @@ $customerData = [
     'email' => 'jimmy@jimmy.com'
 ];
 
-IpaymerPhp::init('Your_Secret_Key')->create($customerData);
+$ipaymer_customer_id = IpaymerPhp::init('Your_Secret_Key')->create($customerData);
 ```
 
 ### Redirection links
@@ -56,6 +59,9 @@ IpaymerPhp::init('Your_Secret_Key')->newCardLink('CUSTOMER_IPAYMER_ID');
 
 ### Status
 Returns customer status on each plan separately. If a customer has 2 plans it will return the status and extra information regarding those plans.
+```php
+IpaymerPhp::init('Your_Secret_Key')->status('CUSTOMER_IPAYMER_ID');
+```
 
 ### Invoices
 Returns all customer invoices in a descending order
