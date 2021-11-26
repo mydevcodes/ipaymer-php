@@ -2,7 +2,7 @@
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/mydevcodes/ ipaymer-php.svg?style=flat-square)](https://packagist.org/packages/mydevcodes/ ipaymer-php)
 [![Total Downloads](https://img.shields.io/packagist/dt/mydevcodes/ ipaymer-php.svg?style=flat-square)](https://packagist.org/packages/mydevcodes/ ipaymer-php)
-![GitHub Actions](https://github.com/mydevcodes/ ipaymer-php/actions/workflows/main.yml/badge.svg)
+
 
 Once you complete your iPaymer account there comes a time when you need to connect it to your application. **This package is your best buddy when it comes to integrating iPaymer into your PHP Application.** 
 *If your platform is not whitelisted by iPaymer you won't be able to use this library.*
@@ -73,6 +73,12 @@ IpaymerPhp::init('Your_Secret_Key')->invoices('CUSTOMER_IPAYMER_ID');
 Cancels a plan in customers billing cycle
 ```php
 IpaymerPhp::init('Your_Secret_Key')->cancel('CUSTOMER_IPAYMER_ID', 'PACKAGE_CODE');
+```
+
+### Remove Card
+Removes a card from a customer
+```php
+IpaymerPhp::init('Your_Secret_Key')->remove('CUSTOMER_IPAYMER_ID', 'IPAYMER_CARD_ID');
 ```
 
 ### Changelog

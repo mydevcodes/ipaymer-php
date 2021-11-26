@@ -2,6 +2,7 @@
 
 namespace Mydevcodes\IpaymerPhp;
 
+use Mydevcodes\IpaymerPhp\Customer\Card;
 use Mydevcodes\IpaymerPhp\Customer\Create;
 use Mydevcodes\IpaymerPhp\Customer\Details;
 use Mydevcodes\IpaymerPhp\Customer\Invoices;
@@ -149,6 +150,16 @@ class IpaymerPhp
     public function plans(string $customer = NULL)
     {
         return (new \Mydevcodes\IpaymerPhp\Subscription\Plans($this->configuration))->retrieve($customer);
+    }
+
+    /**
+     * Remove a specific card from a customer
+     * @param string $customer
+     * @param string $ipaymer_card_id
+     */
+    public function remove(string $customer, string $ipaymer_card_id)
+    {
+        return (new Card($this->configuration, $customer))->remove($ipaymer_card_id);
     }
 
 }
