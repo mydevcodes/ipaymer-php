@@ -5,8 +5,7 @@ namespace Mydevcodes\IpaymerPhp\Utils;
 
 class Routes
 {
-//    const PLATFORM = 'https://ipaymer.com/';
-    const PLATFORM = 'http://ipaymer.loc:8001/';
+    const PLATFORM = 'https://ipaymer.com/';
     const API_URL = self::PLATFORM . 'api/v1/';
     const CHECKOUT = self::PLATFORM . 'portal';
     const CUSTOMER_NEW_CARD = self::PLATFORM . 'update-card';
