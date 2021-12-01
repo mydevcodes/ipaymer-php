@@ -47,6 +47,7 @@ class Invoices extends Request
                     'currency' => $row->currency,
                     'error' => $row->error,
                     'public_url' => $row->public_url,
+                    'created_at' => $row->created_at,
                 ];
             }
         }
