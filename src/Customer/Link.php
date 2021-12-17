@@ -35,9 +35,13 @@ class Link
         return Routes::CHECKOUT . $checkoutParams;
     }
 
-    public function newCard()
+    public function newCard($returnUrl = '')
     {
         $cardParam = "?cus=" . $this->customer;
+        if($returnUrl)
+        {
+            $cardParam .= '&url=' . $returnUrl;
+        }
 
         return Routes::CUSTOMER_NEW_CARD . $cardParam;
     }

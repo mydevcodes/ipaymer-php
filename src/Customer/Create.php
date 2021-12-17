@@ -41,6 +41,12 @@ class Create extends Request
             return $validation->errors()->all();
         }
 
+        $data['live'] = 1;
+        if($this->configuration->environment == 'development')
+        {
+            $data['live'] = 0;
+        }
+
         try {
             $this->postAPI(Routes::CUSTOMER_CREATE, $data);
         }catch (\Exception $e) {
