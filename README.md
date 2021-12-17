@@ -3,7 +3,6 @@
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/mydevcodes/ ipaymer-php.svg?style=flat-square)](https://packagist.org/packages/mydevcodes/ ipaymer-php)
 [![Total Downloads](https://img.shields.io/packagist/dt/mydevcodes/ ipaymer-php.svg?style=flat-square)](https://packagist.org/packages/mydevcodes/ ipaymer-php)
 
-
 Once you complete your iPaymer account there comes a time when you need to connect it to your application. **This package is your best buddy when it comes to integrating iPaymer into your PHP Application.** 
 *If your platform is not whitelisted by iPaymer you won't be able to use this library.*
 
@@ -24,14 +23,6 @@ IpaymerPhp::init('Your_Secret_Key', 'production|development');
 ```
 
 ## Methods
-
-
-### Payment Plans [DEPRACATED]
-All your payment plans should be already registered in iPaymer. If a customer is defined only the plans attached to the same payment gateway will be returned.
-
-```php
-IpaymerPhp::init('Your_Secret_Key')->plans($customerId);
-```
 
 ### Create a customer
 Creating a customer also requires a subscription and a credit card to be attached.
@@ -55,6 +46,25 @@ IpaymerPhp::init('Your_Secret_Key')->checkoutLink('CUSTOMER_IPAYMER_ID', 'PLAN_C
 #### New card
 ```php
 IpaymerPhp::init('Your_Secret_Key')->newCardLink('CUSTOMER_IPAYMER_ID');
+```
+
+### Assign Plan
+Assign a specific plan to a customer. This won't replace any of his previous active plans.
+```php
+IpaymerPhp::init('Your_Secret_Key')->assign('CUSTOMER_IPAYMER_ID', 'PLAN_ID', 'QUANTITY');
+```
+
+### Switch Plan
+Replace a specific plan with another. Often used within upgrades/downgrades.
+```php
+IpaymerPhp::init('Your_Secret_Key')->change('CUSTOMER_IPAYMER_ID', 'FROM_PLAN_ID', 'TO_PLAN_ID');
+```
+
+### Payment Plans [DEPRACATED]
+All your payment plans should be already registered in iPaymer. If a customer is defined only the plans attached to the same payment gateway will be returned.
+
+```php
+IpaymerPhp::init('Your_Secret_Key')->plans($customerId);
 ```
 
 ### Status

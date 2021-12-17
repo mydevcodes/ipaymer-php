@@ -27,7 +27,7 @@ class Create extends Request
      * @return mixed
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
-    public function create(array $data): mixed
+    public function create(array $data)
     {
         $validatior = new Validator;
         $validation = $validatior->make($data, [
