@@ -18,4 +18,5 @@ class Routes
     const CUSTOMER_INFO = "customerInfo";
     const INVOICES = "invoices";
     const CUSTOMER_REMOVE_CARD = "remove-card";
+    const INVOICE_GENERATE = "generate-invoice";
 }

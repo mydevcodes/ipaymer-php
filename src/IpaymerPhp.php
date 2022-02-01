@@ -5,6 +5,7 @@ namespace Mydevcodes\IpaymerPhp;
 use Mydevcodes\IpaymerPhp\Customer\Card;
 use Mydevcodes\IpaymerPhp\Customer\Create;
 use Mydevcodes\IpaymerPhp\Customer\Details;
+use Mydevcodes\IpaymerPhp\Customer\GenerateInvoice;
 use Mydevcodes\IpaymerPhp\Customer\Invoices;
 use Mydevcodes\IpaymerPhp\Customer\Link;
 use Mydevcodes\IpaymerPhp\Customer\Plan;
@@ -101,6 +102,19 @@ class IpaymerPhp
     public function invoices(string $customer)
     {
         return (new Invoices($this->configuration, $customer))->fetch();
+    }
+
+    /**
+     * Generate a custom invoice to customer
+     * @param string $customer
+     * @param string $planCode
+     * @param $price
+     * @param $quantity
+     * @return array|string
+     */
+    public function generateInvoice(string $customer, string $planCode, $price, $quantity = 1)
+    {
+        return (new GenerateInvoice($this->configuration, $customer))->generate($planCode, $price, $quantity);
     }
 
     /**
