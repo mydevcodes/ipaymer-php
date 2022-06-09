@@ -82,7 +82,7 @@ IpaymerPhp::init('Your_Secret_Key')->invoices('CUSTOMER_IPAYMER_ID');
 ### Generate custom invoice
 ```php
 use Mydevcodes\IpaymerPhp\IpaymerPhp;
-IpaymerPhp::init('Your_Secret_Key')->generateInvoice('CUSTOMER_IPAYMER_ID', 'PLAN_CODE', 'PRICE', 'QUANTITY');
+IpaymerPhp::init('Your_Secret_Key')->generateInvoice('CUSTOMER_IPAYMER_ID', 'PLAN_CODE', 'PRICE', 'QUANTITY', 'DESCRIPTION');
 ```
 
 ### Cancel Plan
