@@ -16,14 +16,15 @@ class GenerateInvoice extends Request
         $this->customer = $customer;
     }
 
-    public function generate($code, $price, $quantity = 1)
+    public function generate($code, $price, $quantity = 1, $description = '')
     {
         try {
             $this->postAPI(Routes::INVOICE_GENERATE, [
                 'customer' => $this->customer,
                 'planCode' => $code,
                 'price' => $price,
-                'quantity' => $quantity
+                'quantity' => $quantity,
+                'description' => $description
             ]);
         } catch (\Exception $e) {
             return $e->getMessage();

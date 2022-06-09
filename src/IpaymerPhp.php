@@ -112,9 +112,9 @@ class IpaymerPhp
      * @param $quantity
      * @return array|string
      */
-    public function generateInvoice(string $customer, string $planCode, $price, $quantity = 1)
+    public function generateInvoice(string $customer, string $planCode, $price, $quantity = 1, $description = '')
     {
-        return (new GenerateInvoice($this->configuration, $customer))->generate($planCode, $price, $quantity);
+        return (new GenerateInvoice($this->configuration, $customer))->generate($planCode, $price, $quantity, $description);
     }
 
     /**
