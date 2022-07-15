@@ -11,7 +11,7 @@ class Invoices extends Request
 {
     public $customer;
 
-    public function __construct(Configuration $configuration, array $customer)
+    public function __construct(Configuration $configuration, array|string $customer)
     {
         parent::__construct($configuration);
         $this->customer = $customer;
