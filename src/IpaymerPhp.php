@@ -96,10 +96,10 @@ class IpaymerPhp
 
     /**
      * Return all customer invoices
-     * @param string $customer
+     * @param array $customer
      * @return array|string
      */
-    public function invoices(string $customer)
+    public function invoices(array $customer)
     {
         return (new Invoices($this->configuration, $customer))->fetch();
     }
